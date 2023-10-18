@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a3ce4271597121f44869d10a0a567d64
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 175061
+  packageName: Cartoon Race Track - Oval
+  packageVersion: 1.0.1
+  assetPath: Assets/CartoonTracksPack1/Track1/Prefabs/Track/oval_complete_colliders.prefab
+  uploadId: 412398
