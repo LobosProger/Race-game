@@ -5,12 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
-  - Target
+  - Checkpoint
+  - Bot
+  - Road
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bot car
   - Water
   - UI
   - 

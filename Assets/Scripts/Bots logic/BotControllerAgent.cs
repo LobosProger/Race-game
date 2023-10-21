@@ -9,10 +9,13 @@ something useful for your game. Best regards, Mena.
 */
 
 using System;
+using Unity.MLAgents;
+using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BotControllerAgent : MonoBehaviour
+public class BotControllerAgent : Agent
 {
 
 	//CAR SETUP
@@ -171,8 +174,16 @@ public class BotControllerAgent : MonoBehaviour
 		Left
 	}
 
+	public enum HandbrakeState
+	{
+		None,
+		UseHandbrake
+	}
+
+	// We just assign these parameters when agent receives action from neural model and car will be driven by them
 	private AccelerationState accelerationState;
 	private SteeringState steeringState;
+	private HandbrakeState handbrakeState;
 
 	public void ApplyAcceleration(AccelerationState accelerationState)
 	{
@@ -184,8 +195,12 @@ public class BotControllerAgent : MonoBehaviour
 		this.steeringState = steeringState;
 	}
 
-	// Start is called before the first frame update
-	void Start()
+	public void ApplyHandbrake(HandbrakeState handbrakeState)
+	{
+		this.handbrakeState = handbrakeState;
+	}
+
+	public override void Initialize()
 	{
 		//In this part, we set the 'carRigidbody' value with the Rigidbody attached to this
 		//gameObject. Also, we define the center of mass of the car with the Vector3 given
@@ -234,21 +249,6 @@ public class BotControllerAgent : MonoBehaviour
 			initialCarEngineSoundPitch = carEngineSound.pitch;
 		}
 
-		// We invoke 2 methods inside this script. CarSpeedUI() changes the text of the UI object that stores
-		// the speed of the car and CarSounds() controls the engine and drifting sounds. Both methods are invoked
-		// in 0 seconds, and repeatedly called every 0.1 seconds.
-		if (useUI)
-		{
-			InvokeRepeating("CarSpeedUI", 0f, 0.1f);
-		}
-		else if (!useUI)
-		{
-			if (carSpeedText != null)
-			{
-				carSpeedText.text = "0";
-			}
-		}
-
 		if (useSounds)
 		{
 			InvokeRepeating("CarSounds", 0f, 0.1f);
@@ -284,33 +284,25 @@ public class BotControllerAgent : MonoBehaviour
 				RRWTireSkid.emitting = false;
 			}
 		}
-
-		if (useTouchControls)
-		{
-			if (throttleButton != null && reverseButton != null &&
-			turnRightButton != null && turnLeftButton != null
-			&& handbrakeButton != null)
-			{
-
-				throttlePTI = throttleButton.GetComponent<PrometeoTouchInput>();
-				reversePTI = reverseButton.GetComponent<PrometeoTouchInput>();
-				turnLeftPTI = turnLeftButton.GetComponent<PrometeoTouchInput>();
-				turnRightPTI = turnRightButton.GetComponent<PrometeoTouchInput>();
-				handbrakePTI = handbrakeButton.GetComponent<PrometeoTouchInput>();
-				touchControlsSetup = true;
-
-			}
-			else
-			{
-				String ex = "Touch controls are not completely set up. You must drag and drop your scene buttons in the" +
-				" PrometeoCarController component.";
-				Debug.LogWarning(ex);
-			}
-		}
-
 	}
 
-	// Update is called once per frame
+	// Below code need for machine learning
+
+	public override void CollectObservations(VectorSensor sensor)
+	{
+		base.CollectObservations(sensor);
+	}
+
+	public override void OnActionReceived(ActionBuffers actions)
+	{
+		base.OnActionReceived(actions);
+	}
+
+	public override void Heuristic(in ActionBuffers actionsOut)
+	{
+		base.Heuristic(actionsOut);
+	}
+	
 	void Update()
 	{
 
@@ -386,48 +378,48 @@ public class BotControllerAgent : MonoBehaviour
 		}
 		else
 		{
-
-			if (Input.GetKey(KeyCode.W))
+			// Apply control for using by artifficial intelligence
+			if (accelerationState == AccelerationState.Forward)
 			{
 				CancelInvoke("DecelerateCar");
 				deceleratingCar = false;
 				GoForward();
 			}
-			if (Input.GetKey(KeyCode.S))
+			if (accelerationState == AccelerationState.Backward)
 			{
 				CancelInvoke("DecelerateCar");
 				deceleratingCar = false;
 				GoReverse();
 			}
 
-			if (Input.GetKey(KeyCode.A))
+			if (steeringState == SteeringState.Left)
 			{
 				TurnLeft();
 			}
-			if (Input.GetKey(KeyCode.D))
+			if (steeringState == SteeringState.Right)
 			{
 				TurnRight();
 			}
-			if (Input.GetKey(KeyCode.Space))
+			if (handbrakeState == HandbrakeState.UseHandbrake)
 			{
 				CancelInvoke("DecelerateCar");
 				deceleratingCar = false;
 				Handbrake();
 			}
-			if (Input.GetKeyUp(KeyCode.Space))
+			if (handbrakeState == HandbrakeState.None)
 			{
 				RecoverTraction();
 			}
-			if ((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W)))
+			if (accelerationState == AccelerationState.None)
 			{
 				ThrottleOff();
 			}
-			if ((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W)) && !Input.GetKey(KeyCode.Space) && !deceleratingCar)
+			if (accelerationState == AccelerationState.None && handbrakeState == HandbrakeState.None && !deceleratingCar)
 			{
 				InvokeRepeating("DecelerateCar", 0f, 0.1f);
 				deceleratingCar = true;
 			}
-			if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && steeringAxis != 0f)
+			if (steeringState == SteeringState.None && steeringAxis != 0f)
 			{
 				ResetSteeringAngle();
 			}
