@@ -23,7 +23,6 @@ public class CheckpointManager : MonoBehaviour
 	{
 		if(currentAchievingCheckpointCollider == checkpointArchCollider)
 		{
-			Debug.Log("Chekpoint!");
 			passedWrongCheckpoints.Clear();
 
 			if (Checkpoints.Instance.IsLastCheckpointByIndex(currentAchievingCheckpointIndex))
@@ -46,16 +45,13 @@ public class CheckpointManager : MonoBehaviour
 			Invoke(nameof(ResetCheckpointsAndAgent), timerForResetting);
 		} else
 		{
+			// If agent already passed wrong checkpoint twice, we just doing nothing,
+			// because by this approach we giving to agent a chance to resolve its error
 			if(!IsCheckpointWasAlreadyPassedAsWrong(checkpointArchCollider))
 			{
-				Debug.Log("Wrong Chekpoint!");
 				agent.AddReward(-0.05f);
 				passedWrongCheckpoints.Add(checkpointArchCollider);
-			} else
-			{
-				Debug.Log("This Chekpoint was already passed as wrong!");
 			}
-			
 		}
 	}
 

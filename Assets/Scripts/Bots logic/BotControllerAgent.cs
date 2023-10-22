@@ -296,14 +296,11 @@ public class BotControllerAgent : Agent
 	public override void CollectObservations(VectorSensor sensor)
 	{
 		Vector3 directionToCheckpoint = currentCheckpoint.transform.position - transform.position;
-
-		Debug.Log("Normal distance: "+Vector3.Distance(transform.position, currentCheckpoint.transform.position));
-		Debug.Log("Magnitude: "+ directionToCheckpoint.sqrMagnitude);
-		
+		float distanceToChekpoint = directionToCheckpoint.sqrMagnitude;
 		directionToCheckpoint.Normalize();
-		Debug.Log("Direction: " + directionToCheckpoint);
 
 		sensor.AddObservation(directionToCheckpoint);
+		sensor.AddObservation(distanceToChekpoint);
 		AddReward(-0.001f);
 	}
 
