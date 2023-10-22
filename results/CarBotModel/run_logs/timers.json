@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1697887044",
+        "python_version": "3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\Yaroslav\\Documents\\Unity Projects\\Race (URP)\\venv\\Scripts\\mlagents-learn --run-id=CarBotModel",
+        "mlagents_version": "0.30.0",
+        "mlagents_envs_version": "0.30.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.1.0+cu118",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1697887099"
+    },
+    "total": 54.976042,
+    "count": 1,
+    "self": 0.004375400000000695,
+    "children": {
+        "run_training.setup": {
+            "total": 0.05191910000000011,
+            "count": 1,
+            "self": 0.05191910000000011
+        },
+        "TrainerController.start_learning": {
+            "total": 54.9197475,
+            "count": 1,
+            "self": 0.00029830000000430346,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 54.919439399999995,
+                    "count": 1,
+                    "self": 54.919439399999995
+                },
+                "trainer_threads": {
+                    "total": 8.000000022434506e-07,
+                    "count": 1,
+                    "self": 8.000000022434506e-07
+                },
+                "TrainerController._save_models": {
+                    "total": 8.999999998593466e-06,
+                    "count": 1,
+                    "self": 8.999999998593466e-06
+                }
+            }
+        }
+    }
+}

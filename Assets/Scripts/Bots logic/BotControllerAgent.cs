@@ -174,38 +174,33 @@ public class BotControllerAgent : Agent
 		Left
 	}
 
-	public enum HandbrakeState
-	{
-		None,
-		UseHandbrake
-	}
-
 	// We just assign these parameters when agent receives action from neural model and car will be driven by them
 	private AccelerationState accelerationState;
 	private SteeringState steeringState;
-	private HandbrakeState handbrakeState;
 
-	public void ApplyAcceleration(AccelerationState accelerationState)
-	{
-		this.accelerationState = accelerationState;
-	}
+	private Vector3 initialPositionOfCar;
+	private Vector3 initialRotationOfCar;
+	private CheckpointManager checkpointManager;
+	private Collider currentCheckpoint => checkpointManager.GetCurrentCheckpointCollider();
 
-	public void ApplySteer(SteeringState steeringState)
-	{
-		this.steeringState = steeringState;
-	}
+	/*
+	public void ApplyAcceleration(AccelerationState accelerationState) => this.accelerationState = accelerationState;
 
-	public void ApplyHandbrake(HandbrakeState handbrakeState)
-	{
-		this.handbrakeState = handbrakeState;
-	}
+	public void ApplySteer(SteeringState steeringState) => this.steeringState = steeringState;
+
+	public void ApplyHandbrake(HandbrakeState handbrakeState) => this.handbrakeState = handbrakeState;
+	*/
 
 	public override void Initialize()
 	{
 		//In this part, we set the 'carRigidbody' value with the Rigidbody attached to this
 		//gameObject. Also, we define the center of mass of the car with the Vector3 given
 		//in the inspector.
+		initialPositionOfCar = transform.position;
+		initialRotationOfCar = transform.eulerAngles;
+
 		carRigidbody = gameObject.GetComponent<Rigidbody>();
+		checkpointManager = gameObject.GetComponent<CheckpointManager>();
 		carRigidbody.centerOfMass = bodyMassCenter;
 
 		//Initial setup to calculate the drift value of the car. This part could look a bit
@@ -287,22 +282,78 @@ public class BotControllerAgent : Agent
 	}
 
 	// Below code need for machine learning
+	public override void OnEpisodeBegin()
+	{
+		ThrottleOff();
+		transform.position = initialPositionOfCar;
+		transform.eulerAngles = initialRotationOfCar;
+		carRigidbody.velocity = Vector3.zero;
+
+		accelerationState = AccelerationState.None;
+		steeringState = SteeringState.None;
+	}
 
 	public override void CollectObservations(VectorSensor sensor)
 	{
-		base.CollectObservations(sensor);
+		Vector3 directionToCheckpoint = currentCheckpoint.transform.position - transform.position;
+
+		Debug.Log("Normal distance: "+Vector3.Distance(transform.position, currentCheckpoint.transform.position));
+		Debug.Log("Magnitude: "+ directionToCheckpoint.sqrMagnitude);
+		
+		directionToCheckpoint.Normalize();
+		Debug.Log("Direction: " + directionToCheckpoint);
+
+		sensor.AddObservation(directionToCheckpoint);
+		AddReward(-0.001f);
 	}
 
 	public override void OnActionReceived(ActionBuffers actions)
 	{
-		base.OnActionReceived(actions);
+		accelerationState = (AccelerationState)actions.DiscreteActions[0];
+		steeringState = (SteeringState)actions.DiscreteActions[1];
 	}
 
 	public override void Heuristic(in ActionBuffers actionsOut)
 	{
-		base.Heuristic(actionsOut);
+		var actions = actionsOut.DiscreteActions;
+
+		if(Input.GetKey(KeyCode.W))
+		{
+			accelerationState = AccelerationState.Forward;
+		} else if (Input.GetKey(KeyCode.S))
+		{
+			accelerationState = AccelerationState.Backward;
+		}
+        else
+        {
+			accelerationState = AccelerationState.None;
+		}
+
+		if (Input.GetKey(KeyCode.A))
+		{
+			steeringState = SteeringState.Left;
+		}
+		else if (Input.GetKey(KeyCode.D))
+		{
+			steeringState = SteeringState.Right;
+		}
+		else
+		{
+			steeringState = SteeringState.None;
+		}
+
+		actions[0] = (int)accelerationState;
+		actions[1] = (int)steeringState;
 	}
-	
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if(collision.collider.CompareTag("Wall"))
+		{
+			AddReward(-0.1f);
+		}
+	}
+
 	void Update()
 	{
 
@@ -400,21 +451,21 @@ public class BotControllerAgent : Agent
 			{
 				TurnRight();
 			}
-			if (handbrakeState == HandbrakeState.UseHandbrake)
+
+			/*if (handbrakeState == HandbrakeState.UseHandbrake)
 			{
 				CancelInvoke("DecelerateCar");
 				deceleratingCar = false;
 				Handbrake();
-			}
-			if (handbrakeState == HandbrakeState.None)
-			{
-				RecoverTraction();
-			}
+			}*/
+
+			RecoverTraction();
+
 			if (accelerationState == AccelerationState.None)
 			{
 				ThrottleOff();
 			}
-			if (accelerationState == AccelerationState.None && handbrakeState == HandbrakeState.None && !deceleratingCar)
+			if (accelerationState == AccelerationState.None && !deceleratingCar)
 			{
 				InvokeRepeating("DecelerateCar", 0f, 0.1f);
 				deceleratingCar = true;
