@@ -6,6 +6,7 @@ public class CheckpointManager : MonoBehaviour
 {
     [SerializeField] private Collider currentAchievingCheckpointCollider;
     [SerializeField] private int currentAchievingCheckpointIndex = 0;
+	[SerializeField] private int amountCheckpointToCompleteForTraining = 0;
 	[SerializeField] private float timerForResetting = 20f;
 
 	private BotControllerAgent agent;
@@ -30,26 +31,35 @@ public class CheckpointManager : MonoBehaviour
 				currentAchievingCheckpointIndex = 0;
 				SetCheckpointByCurrentIndex();
 
-				float addingReward = 0.5f;
-				agent.AddReward(addingReward);
+				agent.AddReward(5f);
+				agent.EndEpisode();
 
 			} else
 			{
 				SetNextCheckpoint();
+				//Debug.Log("Checkpoint completed!");
+				agent.AddReward(5f);
 
-				float addingReward = 0.5f / Checkpoints.Instance.amountOfCheckpoints;
-				agent.AddReward(addingReward);
+				if(amountCheckpointToCompleteForTraining != 0 && currentAchievingCheckpointIndex == amountCheckpointToCompleteForTraining)
+				{
+					currentAchievingCheckpointIndex = 0;
+					SetCheckpointByCurrentIndex();
+					agent.EndEpisode();
+				}
 			}
 			
 			CancelInvoke(nameof(ResetCheckpointsAndAgent));
 			Invoke(nameof(ResetCheckpointsAndAgent), timerForResetting);
+
 		} else
 		{
 			// If agent already passed wrong checkpoint twice, we just doing nothing,
 			// because by this approach we giving to agent a chance to resolve its error
+
 			if(!IsCheckpointWasAlreadyPassedAsWrong(checkpointArchCollider))
 			{
-				agent.AddReward(-0.05f);
+				agent.AddReward(-1f);
+				//Debug.Log("Checkpoint already passed!");
 				passedWrongCheckpoints.Add(checkpointArchCollider);
 			}
 		}
@@ -79,7 +89,8 @@ public class CheckpointManager : MonoBehaviour
 		SetCheckpointByCurrentIndex();
 		Invoke(nameof(ResetCheckpointsAndAgent), timerForResetting);
 
-		agent.AddReward(-1f);
+		agent.AddReward(-6f);
+		//Debug.Log("No actions, resetting!");
 		agent.EndEpisode();
 	}
 

@@ -1,26 +1,4 @@
 {
-    "MyTestingML": {
-        "checkpoints": [
-            {
-                "steps": 122841,
-                "file_path": "results\\ppo\\MyTestingML\\MyTestingML-122841.onnx",
-                "reward": 0.9868498527968597,
-                "creation_time": 1697689795.7264793,
-                "auxillary_file_paths": [
-                    "results\\ppo\\MyTestingML\\MyTestingML-122841.pt"
-                ]
-            }
-        ],
-        "final_checkpoint": {
-            "steps": 122841,
-            "file_path": "results\\ppo\\MyTestingML.onnx",
-            "reward": 0.9868498527968597,
-            "creation_time": 1697689795.7264793,
-            "auxillary_file_paths": [
-                "results\\ppo\\MyTestingML\\MyTestingML-122841.pt"
-            ]
-        }
-    },
     "metadata": {
         "stats_format_version": "0.3.0",
         "mlagents_version": "0.30.0",

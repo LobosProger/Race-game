@@ -285,9 +285,10 @@ public class BotControllerAgent : Agent
 	public override void OnEpisodeBegin()
 	{
 		ThrottleOff();
-		transform.position = initialPositionOfCar;
-		transform.eulerAngles = initialRotationOfCar;
 		carRigidbody.velocity = Vector3.zero;
+
+		transform.position = Spawnpoints.instance.GetRandomSpawnpoint().transform.position;
+		transform.eulerAngles = initialRotationOfCar;
 
 		accelerationState = AccelerationState.None;
 		steeringState = SteeringState.None;
@@ -296,11 +297,11 @@ public class BotControllerAgent : Agent
 	public override void CollectObservations(VectorSensor sensor)
 	{
 		Vector3 directionToCheckpoint = currentCheckpoint.transform.position - transform.position;
-		float distanceToChekpoint = directionToCheckpoint.sqrMagnitude;
+		float rotationY = transform.eulerAngles.y;
 		directionToCheckpoint.Normalize();
 
 		sensor.AddObservation(directionToCheckpoint);
-		sensor.AddObservation(distanceToChekpoint);
+		sensor.AddObservation(rotationY);
 		AddReward(-0.001f);
 	}
 
@@ -347,6 +348,16 @@ public class BotControllerAgent : Agent
 	{
 		if(collision.collider.CompareTag("Wall"))
 		{
+			//Debug.Log("Detected wall");
+			AddReward(-0.5f);
+		}
+	}
+
+	private void OnCollisionStay(Collision collision)
+	{
+		if (collision.collider.CompareTag("Wall"))
+		{
+			//Debug.Log("On staying on wall");
 			AddReward(-0.1f);
 		}
 	}

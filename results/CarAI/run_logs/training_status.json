@@ -1,0 +1,65 @@
+{
+    "BotControllerAgent": {
+        "checkpoints": [
+            {
+                "steps": 35499950,
+                "file_path": "results\\CarAI\\BotControllerAgent\\BotControllerAgent-35499950.onnx",
+                "reward": -2.68308196998921,
+                "creation_time": 1698112748.2094083,
+                "auxillary_file_paths": [
+                    "results\\CarAI\\BotControllerAgent\\BotControllerAgent-35499950.pt"
+                ]
+            },
+            {
+                "steps": 35999997,
+                "file_path": "results\\CarAI\\BotControllerAgent\\BotControllerAgent-35999997.onnx",
+                "reward": -2.3586501165118534,
+                "creation_time": 1698113203.918738,
+                "auxillary_file_paths": [
+                    "results\\CarAI\\BotControllerAgent\\BotControllerAgent-35999997.pt"
+                ]
+            },
+            {
+                "steps": 36499989,
+                "file_path": "results\\CarAI\\BotControllerAgent\\BotControllerAgent-36499989.onnx",
+                "reward": -1.1186037053078137,
+                "creation_time": 1698113668.4805133,
+                "auxillary_file_paths": [
+                    "results\\CarAI\\BotControllerAgent\\BotControllerAgent-36499989.pt"
+                ]
+            },
+            {
+                "steps": 36999948,
+                "file_path": "results\\CarAI\\BotControllerAgent\\BotControllerAgent-36999948.onnx",
+                "reward": -1.0148999905213714,
+                "creation_time": 1698114125.479997,
+                "auxillary_file_paths": [
+                    "results\\CarAI\\BotControllerAgent\\BotControllerAgent-36999948.pt"
+                ]
+            },
+            {
+                "steps": 37108774,
+                "file_path": "results\\CarAI\\BotControllerAgent\\BotControllerAgent-37108774.onnx",
+                "reward": -1.3249016735780363,
+                "creation_time": 1698114308.1858125,
+                "auxillary_file_paths": [
+                    "results\\CarAI\\BotControllerAgent\\BotControllerAgent-37108774.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 37108774,
+            "file_path": "results\\CarAI\\BotControllerAgent.onnx",
+            "reward": -1.3249016735780363,
+            "creation_time": 1698114308.1858125,
+            "auxillary_file_paths": [
+                "results\\CarAI\\BotControllerAgent\\BotControllerAgent-37108774.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.1.0+cu118"
+    }
+}
