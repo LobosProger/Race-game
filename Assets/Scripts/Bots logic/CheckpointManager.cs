@@ -38,7 +38,7 @@ public class CheckpointManager : MonoBehaviour
 			{
 				SetNextCheckpoint();
 				//Debug.Log("Checkpoint completed!");
-				agent.AddReward(5f);
+				agent.AddReward(1f);
 
 				if(amountCheckpointToCompleteForTraining != 0 && currentAchievingCheckpointIndex == amountCheckpointToCompleteForTraining)
 				{
@@ -89,7 +89,7 @@ public class CheckpointManager : MonoBehaviour
 		SetCheckpointByCurrentIndex();
 		Invoke(nameof(ResetCheckpointsAndAgent), timerForResetting);
 
-		agent.AddReward(-6f);
+		//agent.AddReward(-6f);
 		//Debug.Log("No actions, resetting!");
 		agent.EndEpisode();
 	}

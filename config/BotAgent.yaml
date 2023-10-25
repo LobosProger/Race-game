@@ -3,8 +3,8 @@ behaviors:
   BotControllerAgent:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 1024
-      buffer_size: 12000
+      batch_size: 256
+      buffer_size: 10240
       learning_rate: 0.0003
       beta: 0.005
       epsilon: 0.2
@@ -17,7 +17,7 @@ behaviors:
     network_settings:
       normalize: false
       hidden_units: 128
-      num_layers: 2
+      num_layers: 3
       vis_encode_type: simple
       memory: null
       goal_conditioning_type: hyper
@@ -29,7 +29,7 @@ behaviors:
         network_settings:
           normalize: false
           hidden_units: 128
-          num_layers: 2
+          num_layers: 3
           vis_encode_type: simple
           memory: null
           goal_conditioning_type: hyper
@@ -42,8 +42,9 @@ behaviors:
     summary_freq: 100000
     threaded: false
     self_play: null
-    behavioral_cloning:
-      demo_path: C:\Users\Yaroslav\Documents\Unity Projects\Race (URP)\Assets\Demonstration\DemonstrationDem.demo
+    behavioral_cloning: none
+      #demo_path: C:\Users\Yaroslav\Documents\Unity Projects\Race (URP)\Assets\Demonstration\DemonstrationDem.demo
+      #strength: 0.8
 env_settings:
   env_path: null
   env_args: null
@@ -67,8 +68,8 @@ checkpoint_settings:
   run_id: ppo
   initialize_from: null
   load_model: false
-  resume: true
-  force: false
+  resume: false
+  force: true
   train_model: false
   inference: false
   results_dir: results

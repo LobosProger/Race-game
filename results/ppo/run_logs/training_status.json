@@ -1,4 +1,62 @@
 {
+    "BotControllerAgent": {
+        "checkpoints": [
+            {
+                "steps": 6999991,
+                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-6999991.onnx",
+                "reward": -0.06960779136302424,
+                "creation_time": 1698218845.0183067,
+                "auxillary_file_paths": [
+                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-6999991.pt"
+                ]
+            },
+            {
+                "steps": 7499966,
+                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-7499966.onnx",
+                "reward": -0.8382905166373293,
+                "creation_time": 1698219305.9541385,
+                "auxillary_file_paths": [
+                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-7499966.pt"
+                ]
+            },
+            {
+                "steps": 7999964,
+                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-7999964.onnx",
+                "reward": 0.4550000161398202,
+                "creation_time": 1698219773.9335694,
+                "auxillary_file_paths": [
+                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-7999964.pt"
+                ]
+            },
+            {
+                "steps": 8499981,
+                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-8499981.onnx",
+                "reward": 0.05415641035072107,
+                "creation_time": 1698220236.3305204,
+                "auxillary_file_paths": [
+                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-8499981.pt"
+                ]
+            },
+            {
+                "steps": 8554975,
+                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-8554975.onnx",
+                "reward": 0.3597753161794684,
+                "creation_time": 1698220353.4010835,
+                "auxillary_file_paths": [
+                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-8554975.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 8554975,
+            "file_path": "results\\ppo\\BotControllerAgent.onnx",
+            "reward": 0.3597753161794684,
+            "creation_time": 1698220353.4010835,
+            "auxillary_file_paths": [
+                "results\\ppo\\BotControllerAgent\\BotControllerAgent-8554975.pt"
+            ]
+        }
+    },
     "metadata": {
         "stats_format_version": "0.3.0",
         "mlagents_version": "0.30.0",

@@ -296,13 +296,14 @@ public class BotControllerAgent : Agent
 
 	public override void CollectObservations(VectorSensor sensor)
 	{
-		Vector3 directionToCheckpoint = currentCheckpoint.transform.position - transform.position;
-		float rotationY = transform.eulerAngles.y;
+		Vector3 offset = currentCheckpoint.transform.position - transform.position;
+		Vector2 directionToCheckpoint = new Vector2(offset.x, offset.z);
+		Vector2 directionOfCar = new Vector2(transform.forward.x, transform.forward.z);
 		directionToCheckpoint.Normalize();
 
 		sensor.AddObservation(directionToCheckpoint);
-		sensor.AddObservation(rotationY);
-		AddReward(-0.001f);
+		sensor.AddObservation(directionOfCar);
+		//AddReward(-0.001f);
 	}
 
 	public override void OnActionReceived(ActionBuffers actions)
@@ -349,7 +350,7 @@ public class BotControllerAgent : Agent
 		if(collision.collider.CompareTag("Wall"))
 		{
 			//Debug.Log("Detected wall");
-			AddReward(-0.5f);
+			AddReward(-1f);
 		}
 	}
 
@@ -358,7 +359,7 @@ public class BotControllerAgent : Agent
 		if (collision.collider.CompareTag("Wall"))
 		{
 			//Debug.Log("On staying on wall");
-			AddReward(-0.1f);
+			AddReward(-0.02f);
 		}
 	}
 
