@@ -303,7 +303,7 @@ public class BotControllerAgent : Agent
 
 		sensor.AddObservation(directionToCheckpoint);
 		sensor.AddObservation(directionOfCar);
-		//AddReward(-0.001f);
+		AddReward(-0.00001f);
 	}
 
 	public override void OnActionReceived(ActionBuffers actions)
@@ -350,7 +350,7 @@ public class BotControllerAgent : Agent
 		if(collision.collider.CompareTag("Wall"))
 		{
 			//Debug.Log("Detected wall");
-			AddReward(-1f);
+			AddReward(-0.1f);
 		}
 	}
 
@@ -359,7 +359,7 @@ public class BotControllerAgent : Agent
 		if (collision.collider.CompareTag("Wall"))
 		{
 			//Debug.Log("On staying on wall");
-			AddReward(-0.02f);
+			AddReward(-0.002f);
 		}
 	}
 

@@ -4,7 +4,7 @@ behaviors:
     trainer_type: ppo
     hyperparameters:
       batch_size: 256
-      buffer_size: 10240
+      buffer_size: 40960
       learning_rate: 0.0003
       beta: 0.005
       epsilon: 0.2
@@ -45,7 +45,7 @@ behaviors:
     behavioral_cloning:
       demo_path: C:\Users\Yaroslav\Documents\Unity Projects\Race (URP)\Assets\Demonstration\DemonstrationDem.demo
       steps: 0
-      strength: 0.8
+      strength: 0.1
       samples_per_update: 0
       num_epoch: null
       batch_size: null
@@ -72,8 +72,8 @@ checkpoint_settings:
   run_id: ppo
   initialize_from: null
   load_model: false
-  resume: false
-  force: true
+  resume: true
+  force: false
   train_model: false
   inference: false
   results_dir: results

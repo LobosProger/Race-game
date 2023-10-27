@@ -2,58 +2,58 @@
     "BotControllerAgent": {
         "checkpoints": [
             {
-                "steps": 6999991,
-                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-6999991.onnx",
-                "reward": -0.06960779136302424,
-                "creation_time": 1698218845.0183067,
+                "steps": 64999945,
+                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-64999945.onnx",
+                "reward": -0.23509066525128305,
+                "creation_time": 1698381310.4031117,
                 "auxillary_file_paths": [
-                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-6999991.pt"
+                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-64999945.pt"
                 ]
             },
             {
-                "steps": 7499966,
-                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-7499966.onnx",
-                "reward": -0.8382905166373293,
-                "creation_time": 1698219305.9541385,
+                "steps": 65499963,
+                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-65499963.onnx",
+                "reward": -0.1923592296388797,
+                "creation_time": 1698381721.519642,
                 "auxillary_file_paths": [
-                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-7499966.pt"
+                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-65499963.pt"
                 ]
             },
             {
-                "steps": 7999964,
-                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-7999964.onnx",
-                "reward": 0.4550000161398202,
-                "creation_time": 1698219773.9335694,
+                "steps": 65999950,
+                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-65999950.onnx",
+                "reward": -0.2100414268427882,
+                "creation_time": 1698382106.569244,
                 "auxillary_file_paths": [
-                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-7999964.pt"
+                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-65999950.pt"
                 ]
             },
             {
-                "steps": 8499981,
-                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-8499981.onnx",
-                "reward": 0.05415641035072107,
-                "creation_time": 1698220236.3305204,
+                "steps": 66499973,
+                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-66499973.onnx",
+                "reward": -0.4720077547974922,
+                "creation_time": 1698382522.8543518,
                 "auxillary_file_paths": [
-                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-8499981.pt"
+                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-66499973.pt"
                 ]
             },
             {
-                "steps": 8554975,
-                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-8554975.onnx",
-                "reward": 0.3597753161794684,
-                "creation_time": 1698220353.4010835,
+                "steps": 66539786,
+                "file_path": "results\\ppo\\BotControllerAgent\\BotControllerAgent-66539786.onnx",
+                "reward": -0.2977059219297189,
+                "creation_time": 1698382617.9565907,
                 "auxillary_file_paths": [
-                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-8554975.pt"
+                    "results\\ppo\\BotControllerAgent\\BotControllerAgent-66539786.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 8554975,
+            "steps": 66539786,
             "file_path": "results\\ppo\\BotControllerAgent.onnx",
-            "reward": 0.3597753161794684,
-            "creation_time": 1698220353.4010835,
+            "reward": -0.2977059219297189,
+            "creation_time": 1698382617.9565907,
             "auxillary_file_paths": [
-                "results\\ppo\\BotControllerAgent\\BotControllerAgent-8554975.pt"
+                "results\\ppo\\BotControllerAgent\\BotControllerAgent-66539786.pt"
             ]
         }
     },

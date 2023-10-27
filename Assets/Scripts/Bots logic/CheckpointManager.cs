@@ -31,14 +31,15 @@ public class CheckpointManager : MonoBehaviour
 				currentAchievingCheckpointIndex = 0;
 				SetCheckpointByCurrentIndex();
 
-				agent.AddReward(5f);
+				//Debug.Log("Loop completed!");
+				agent.AddReward(1f);
 				agent.EndEpisode();
 
 			} else
 			{
 				SetNextCheckpoint();
-				//Debug.Log("Checkpoint completed!");
-				agent.AddReward(1f);
+				//Debug.Log("Checkpoint completed! "+ (1f / Checkpoints.Instance.amountOfCheckpoints));
+				agent.AddReward((1f / Checkpoints.Instance.amountOfCheckpoints));
 
 				if(amountCheckpointToCompleteForTraining != 0 && currentAchievingCheckpointIndex == amountCheckpointToCompleteForTraining)
 				{
@@ -58,7 +59,7 @@ public class CheckpointManager : MonoBehaviour
 
 			if(!IsCheckpointWasAlreadyPassedAsWrong(checkpointArchCollider))
 			{
-				agent.AddReward(-1f);
+				agent.AddReward(-0.1f);
 				//Debug.Log("Checkpoint already passed!");
 				passedWrongCheckpoints.Add(checkpointArchCollider);
 			}

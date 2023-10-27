@@ -4,7 +4,7 @@ behaviors:
     trainer_type: ppo
     hyperparameters:
       batch_size: 256
-      buffer_size: 40960
+      buffer_size: 20480
       learning_rate: 0.0003
       beta: 0.005
       epsilon: 0.2
@@ -44,7 +44,11 @@ behaviors:
     self_play: null
     behavioral_cloning:
       demo_path: C:\Users\Yaroslav\Documents\Unity Projects\Race (URP)\Assets\Demonstration\DemonstrationDem.demo
-      strength: 0.1
+      steps: 0
+      strength: 0.8
+      samples_per_update: 0
+      num_epoch: null
+      batch_size: null
 env_settings:
   env_path: null
   env_args: null
@@ -52,24 +56,24 @@ env_settings:
   num_envs: 1
   num_areas: 1
   seed: -1
-  #max_lifetime_restarts: 10
-  #restarts_rate_limit_n: 1
-  #restarts_rate_limit_period_s: 60
+  max_lifetime_restarts: 10
+  restarts_rate_limit_n: 1
+  restarts_rate_limit_period_s: 60
 engine_settings:
   width: 84
   height: 84
   quality_level: 5
-  time_scale: 20
+  time_scale: 20.0
   target_frame_rate: -1
   capture_frame_rate: 60
   no_graphics: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: ppo
+  run_id: BotHalfLoop
   initialize_from: null
   load_model: false
-  resume: true
-  force: false
+  resume: false
+  force: true
   train_model: false
   inference: false
   results_dir: results
