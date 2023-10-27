@@ -5,15 +5,19 @@ using UnityEngine;
 public class RaceLoopArch : RaceArch
 {
 	[SerializeField] private int amountLoopsToCompleteRace = 1;
+	[SerializeField] private AudioClip soundOfStartRace;
+	[SerializeField] private AudioClip soundOfCompleteLoop;
 
 	public static int currentAmountOfCompletedLoops { get; private set; } = 0;
 	public static int maxAmountLoopsToComplete { get; private set; }
 
 	private bool isArchWasPassedOnStartOfRace = false;
+	private AudioSource audioSource;
 
 	private void Start()
 	{
 		maxAmountLoopsToComplete = amountLoopsToCompleteRace;
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	protected override void OnArchPassByPlayer()
@@ -22,6 +26,7 @@ public class RaceLoopArch : RaceArch
 		{
             isArchWasPassedOnStartOfRace = true;
 			RaceEvents.OnStartRace();
+			PlaySoundOfStartedRace();
 		}
 		else
 		{
@@ -34,8 +39,21 @@ public class RaceLoopArch : RaceArch
 				} else
 				{
 					RaceEvents.OnCompleteLoop();
+					PlaySoundOfCompletedLoop();
 				}
 			}
         }
+	}
+
+	private void PlaySoundOfCompletedLoop()
+	{
+		audioSource.clip = soundOfCompleteLoop;
+		audioSource.Play();
+	}
+
+	private void PlaySoundOfStartedRace()
+	{
+		audioSource.clip = soundOfStartRace;
+		audioSource.Play();
 	}
 }

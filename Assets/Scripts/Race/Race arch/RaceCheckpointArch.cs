@@ -8,9 +8,11 @@ public class RaceCheckpointArch : RaceArch
 	private static int amountOfCompletedCheckpoints = 0;
 
 	private bool isCheckpointArchCompleted;
+	private AudioSource audioSource;
 
 	private void Start()
 	{
+		audioSource = GetComponent<AudioSource>();
 		amountOfCheckpointArchs++;
 	}
 
@@ -30,6 +32,7 @@ public class RaceCheckpointArch : RaceArch
 		{
 			isCheckpointArchCompleted = true;
 			RaceEvents.OnCompleteCheckpoint();
+			audioSource.Play();
 			amountOfCompletedCheckpoints++;
 		}
 	}
