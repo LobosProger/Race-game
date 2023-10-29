@@ -23,10 +23,11 @@ public class CameraViewController : MonoBehaviour
 	private CinemachineTransposer cinemachineTransposer;
 	private CinemachineComposer cinemachineComposer;
 	
-	private Vector3 initialRotationOffsetFromThirdPersonView;
 	private const float dampingFollowingIn3rdView = 0.1f;
 	private const float dampingFollowingIn1stView = 0.03f;
 	private const float dampingFollowingInAirView = 0.1f;
+
+	private Vector3 initialRotationOffsetFromThirdPersonView;
 
 	private void Start()
 	{

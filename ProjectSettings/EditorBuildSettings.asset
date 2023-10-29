@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Race1.unity
+    guid: 33433692250fab740bfce4418f09282d
+  - enabled: 0
     path: Assets/Scenes/Testing.unity
     guid: 84940c66ca980c24a9cdd7512e19873b
   - enabled: 0
     path: Assets/Scenes/Machine learning.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Scenes/Race1.unity
-    guid: 33433692250fab740bfce4418f09282d
   m_configObjects:
     com.unity.ml-agents.settings: {fileID: 11400000, guid: bf893c12e1631c94381074301f38a6ec,
       type: 2}

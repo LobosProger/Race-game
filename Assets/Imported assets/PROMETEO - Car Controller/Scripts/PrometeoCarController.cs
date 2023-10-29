@@ -11,8 +11,10 @@ something useful for your game. Best regards, Mena.
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
+using Cinemachine;
 
-public class PrometeoCarController : MonoBehaviour
+public class PrometeoCarController : NetworkBehaviour
 {
 
 	//CAR SETUP
@@ -285,9 +287,21 @@ public class PrometeoCarController : MonoBehaviour
 
 	}
 
+	public override void OnNetworkSpawn()
+	{
+		if (IsOwner)
+		{
+			CinemachineVirtualCamera cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+			cinemachineVirtualCamera.Follow = transform;
+			cinemachineVirtualCamera.LookAt = transform;
+		}
+	}
+
 	// Update is called once per frame
 	void Update()
 	{
+		if (!IsOwner)
+			return;
 
 		//CAR DATA
 
