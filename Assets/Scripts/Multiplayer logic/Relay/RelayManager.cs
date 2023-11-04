@@ -12,6 +12,7 @@ using UnityEngine;
 public class RelayManager : MonoBehaviour
 {
 	public static RelayManager Singleton;
+	public string JoinCode {  get; private set; }
 
 	private void Awake()
 	{
@@ -27,8 +28,8 @@ public class RelayManager : MonoBehaviour
 	public async void CreateRelay()
 	{
 		Allocation allocation = await RelayService.Instance.CreateAllocationAsync(3);
-		string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-		Debug.Log(joinCode);
+		JoinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+		Debug.Log(JoinCode);
 
 		RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
 		NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);

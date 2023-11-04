@@ -7,8 +7,8 @@ public class NetworkFrontWheelsRotation : NetworkBehaviour
 {
 	[SerializeField] private List<Transform> animatableWheels = new List<Transform>();
 
-    [SerializeField] private NetworkVariable<sbyte> rotationAngleY = new NetworkVariable<sbyte>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    [SerializeField] private NetworkVariable<sbyte> rotationAngleX = new NetworkVariable<sbyte>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private NetworkVariable<sbyte> rotationAngleY = new NetworkVariable<sbyte>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private NetworkVariable<sbyte> rotationAngleX = new NetworkVariable<sbyte>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 	private void Update()
 	{
