@@ -126,10 +126,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 209444
-  packageName: 'PROMETEO: Car Controller'
-  packageVersion: 1.2.2
-  assetPath: Assets/PROMETEO - Car Controller/Textures/PCC_TextureAtlas.png
-  uploadId: 513063

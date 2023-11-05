@@ -8,6 +8,8 @@ public class RaceCompletionTimer : MonoBehaviour
 	private float timeOfStartingCompletingLastCheckpointOfRace;
 	private float timeOfStartingCompletingRace;
 
+	public static float TimeOfCompletingRace {  get; private set; }
+
 	private bool isRaceCompleting;
 
 	private void OnEnable()
@@ -29,8 +31,8 @@ public class RaceCompletionTimer : MonoBehaviour
 	{
 		if(isRaceCompleting)
 		{
-			float currentTimeOfCompletion = Time.time - timeOfStartingCompletingRace;
-			RaceTimerUI.Instance.ShowTimeOfCompletingRace(currentTimeOfCompletion);
+			TimeOfCompletingRace = Time.time - timeOfStartingCompletingRace;
+			RaceTimerUI.Instance.ShowTimeOfCompletingRace(TimeOfCompletingRace);
 		}
 	}
 
