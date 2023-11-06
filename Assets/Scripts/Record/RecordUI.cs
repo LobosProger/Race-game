@@ -14,7 +14,7 @@ public class RecordUI : MonoBehaviour
     {
 		TimeSpan timeSpan = TimeSpan.FromSeconds(timeOfCompletion);
         recordText.text = timeSpan.ToString("mm':'ss':'ff");
-		numberText.text = orderNumberOfRecord.ToString();
+		numberText.text = "#" + orderNumberOfRecord.ToString();
 	}
 
     public void ShowPlayerRecord(int orderNumberOfRecord, float timeOfCompletion)

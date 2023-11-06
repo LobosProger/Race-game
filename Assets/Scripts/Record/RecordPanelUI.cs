@@ -6,7 +6,8 @@ using System.Linq;
 
 public class RecordPanelUI : MonoBehaviour
 {
-	[SerializeField] private CanvasGroup panelOfRecords;
+	[SerializeField] private CanvasGroup leaderboardPanel;
+	[SerializeField] private Transform recordsPanel;
     [SerializeField] private RecordUI playerRecordPrefab;
 
 	private void OnEnable()
@@ -23,7 +24,7 @@ public class RecordPanelUI : MonoBehaviour
 
 	private void ShowLeaderboard()
 	{
-		panelOfRecords.DOFade(1f, 0.5f);
+		leaderboardPanel.DOFade(1f, 0.5f);
 	}
 
 	private void UpdateLeaderboardWithRecords()
@@ -31,14 +32,14 @@ public class RecordPanelUI : MonoBehaviour
 		ClearLeaderboard();
 
 		NetworkRecord[] allRecordsOfPlayers = FindObjectsOfType<NetworkRecord>();
-		allRecordsOfPlayers.OrderByDescending(record => record.GetAchievedRecord());
+		allRecordsOfPlayers.OrderBy(record => record.GetAchievedRecord());
 
 		ShowRecordsOfPlayersOnPanel(allRecordsOfPlayers);
 	}
 
 	private void ClearLeaderboard()
 	{
-		foreach(Transform eachRecord in panelOfRecords.transform)
+		foreach(Transform eachRecord in recordsPanel.transform)
 		{
 			Destroy(eachRecord.gameObject);
 		}
@@ -46,19 +47,25 @@ public class RecordPanelUI : MonoBehaviour
 
 	private void ShowRecordsOfPlayersOnPanel(NetworkRecord[] records)
 	{
+		int orderNumberOfRecordForShowing = 1;
 		for (int i = 0; i < records.Length; i++)
 		{
 			float timeOfCompletionByPlayer = records[i].GetAchievedRecord();
 			bool isRecordAchievedByPlayer = records[i].IsRecordAchievedByPlayer();
-			int orderNumberOfRecordForShowing = i + 1;
-			
-			RecordUI createdRecord = Instantiate(playerRecordPrefab, panelOfRecords.transform);
-			if(isRecordAchievedByPlayer)
+
+			if(timeOfCompletionByPlayer != 0)
 			{
-				createdRecord.ShowPlayerRecord(orderNumberOfRecordForShowing, timeOfCompletionByPlayer);
-			} else
-			{
-				createdRecord.ShowRecord(orderNumberOfRecordForShowing, timeOfCompletionByPlayer);
+				RecordUI createdRecord = Instantiate(playerRecordPrefab, recordsPanel.transform);
+				if (isRecordAchievedByPlayer)
+				{
+					createdRecord.ShowPlayerRecord(orderNumberOfRecordForShowing, timeOfCompletionByPlayer);
+				}
+				else
+				{
+					createdRecord.ShowRecord(orderNumberOfRecordForShowing, timeOfCompletionByPlayer);
+				}
+
+				orderNumberOfRecordForShowing++;
 			}
 		}
 	}
