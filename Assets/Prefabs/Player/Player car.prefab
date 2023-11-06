@@ -489,6 +489,7 @@ GameObject:
   - component: {fileID: 2085005831720773301}
   - component: {fileID: 5627363787385806580}
   - component: {fileID: 3017367880558145644}
+  - component: {fileID: 1076004479343414615}
   m_Layer: 0
   m_Name: Player car
   m_TagString: Player
@@ -555,9 +556,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fefceefe666bb4682b272ec8c5bdd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 300
+  maxSpeed: 190
   maxReverseSpeed: 45
-  accelerationMultiplier: 15
+  accelerationMultiplier: 10
   maxSteeringAngle: 35
   steeringSpeed: 0.5
   brakeForce: 450
@@ -713,6 +714,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1076004479343414615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2687099459696089956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d466ed09b13cc4e8189252c293135a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeOfCompletionRace:
+    m_InternalValue: 0
 --- !u!1 &2839318289371986243
 GameObject:
   m_ObjectHideFlags: 0
