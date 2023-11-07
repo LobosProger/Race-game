@@ -8,7 +8,10 @@ public class NetworkSpawnpointManager : NetworkBehaviour
 {
 	public override void OnNetworkSpawn()
 	{
-		Transform spawnpoint = NetworkSpawnpoint.GetSpawnpoint();
-		GetComponent<NetworkTransform>().Teleport(spawnpoint.transform.position, transform.rotation, transform.localScale);
+		if(IsOwner)
+		{
+			Transform spawnpoint = NetworkSpawnpoint.GetSpawnpoint();
+			GetComponent<NetworkTransform>().Teleport(spawnpoint.transform.position, transform.rotation, transform.localScale);
+		}
 	}
 }
