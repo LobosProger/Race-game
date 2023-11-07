@@ -22,12 +22,19 @@ public class NetworkSpawnpoint : MonoBehaviour
 	{
 		spawnpoints.Add(spawnpoint);
 		spawnpoints.OrderBy(spawnpoint => spawnpoint.GetSiblingIndex()).ToList();
+
+		foreach (Transform child in spawnpoints)
+		{
+			Debug.Log(child.name+"\n");
+		}
 	}
 
 	public static void RemoveSpawnpoint(Transform spawnpoint)
 	{
 		spawnpoints.Remove(spawnpoint);
 		spawnpoints.OrderBy(spawnpoint => spawnpoint.GetSiblingIndex()).ToList();
+
+		
 	}
 
 	public static Transform GetSpawnpoint()
