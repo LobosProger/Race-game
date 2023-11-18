@@ -10,6 +10,7 @@ public class RaceEvents : MonoBehaviour
     public static event RaceBaseHandler OnCompleteLoopEvent;
     public static event RaceBaseHandler OnCompleteCheckpointEvent;
     public static event RaceBaseHandler OnCompleteRaceEvent;
+    public static event RaceBaseHandler OnRestartRaceEvent;
     public static event RaceBaseHandler OnCompleteRaceByAnyNetworkPlayerEvent;
 
     public static void OnStartRace()
@@ -42,6 +43,14 @@ public class RaceEvents : MonoBehaviour
 		{
 			OnCompleteRaceEvent();
 		}
+	}
+
+    public static void OnRestartRace()
+    {
+        if(OnRestartRaceEvent != null)
+        {
+            OnRestartRaceEvent();
+        }
 	}
 
     public static void OnCompleteRaceByAnyNetworkPlayer()

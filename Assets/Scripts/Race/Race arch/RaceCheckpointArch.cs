@@ -19,11 +19,13 @@ public class RaceCheckpointArch : RaceArch
 	private void OnEnable()
 	{
 		RaceEvents.OnCompleteLoopEvent += ResetCompletedCheckpoints;
+		RaceEvents.OnRestartRaceEvent += ResetCompletedCheckpoints;
 	}
 
 	private void OnDisable()
 	{
 		RaceEvents.OnCompleteLoopEvent -= ResetCompletedCheckpoints;
+		RaceEvents.OnRestartRaceEvent -= ResetCompletedCheckpoints;
 	}
 
 	protected override void OnArchPassByPlayer()

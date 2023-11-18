@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEditor;
 
 public class NetworkRecord : NetworkBehaviour
 {
@@ -12,6 +13,7 @@ public class NetworkRecord : NetworkBehaviour
 		if(IsOwner)
 		{
 			RaceEvents.OnCompleteRaceEvent += CaptureNetworkRecordOfCompletionRace;
+			RaceEvents.OnRestartRaceEvent += RestartStateServerRpc;
 		}
 	}
 
@@ -20,6 +22,7 @@ public class NetworkRecord : NetworkBehaviour
 		if (IsOwner)
 		{
 			RaceEvents.OnCompleteRaceEvent -= CaptureNetworkRecordOfCompletionRace;
+			RaceEvents.OnRestartRaceEvent -= RestartStateServerRpc;
 		}
 
 		timeOfCompletionRace.OnValueChanged -= (prevVal, newVal) => RaceEvents.OnCompleteRaceByAnyNetworkPlayer();
@@ -33,6 +36,21 @@ public class NetworkRecord : NetworkBehaviour
 	private void CaptureNetworkRecordOfCompletionRace()
 	{
 		timeOfCompletionRace.Value = RaceCompletionTimer.TimeOfCompletingRace;
+	}
+
+	[ServerRpc]
+	private void RestartStateServerRpc()
+	{
+		RestartStateClientRpc();
+	}
+
+	[ClientRpc]
+	private void RestartStateClientRpc()
+	{
+		if(IsOwner)
+		{
+			timeOfCompletionRace.Value = 0;
+		}
 	}
 
 	public float GetAchievedRecord() => timeOfCompletionRace.Value;

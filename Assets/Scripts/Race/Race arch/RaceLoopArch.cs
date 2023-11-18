@@ -10,9 +10,19 @@ public class RaceLoopArch : RaceArch
 
 	public static int currentAmountOfCompletedLoops { get; private set; } = 0;
 	public static int maxAmountLoopsToComplete { get; private set; }
-
 	private bool isArchWasPassedOnStartOfRace = false;
+
 	private AudioSource audioSource;
+
+	private void OnEnable()
+	{
+		RaceEvents.OnRestartRaceEvent += RestartState;
+	}
+
+	private void OnDisable()
+	{
+		RaceEvents.OnRestartRaceEvent -= RestartState;
+	}
 
 	private void Start()
 	{
@@ -55,5 +65,12 @@ public class RaceLoopArch : RaceArch
 	{
 		audioSource.clip = soundOfStartRace;
 		audioSource.Play();
+	}
+
+	private void RestartState()
+	{
+		isArchWasPassedOnStartOfRace = false;
+		maxAmountLoopsToComplete = amountLoopsToCompleteRace;
+		currentAmountOfCompletedLoops = 0;
 	}
 }

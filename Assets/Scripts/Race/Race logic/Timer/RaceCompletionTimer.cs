@@ -18,13 +18,16 @@ public class RaceCompletionTimer : MonoBehaviour
 		RaceEvents.OnCompleteLoopEvent += OnCompleteLoopOfRace;
 		RaceEvents.OnCompleteCheckpointEvent += OnPassCheckpoint;
 		RaceEvents.OnCompleteRaceEvent += OnCompleteRace;
+		RaceEvents.OnRestartRaceEvent += RestartState;
 	}
+
 	private void OnDisable()
 	{
 		RaceEvents.OnStartRaceEvent -= OnStartRace;
 		RaceEvents.OnCompleteLoopEvent -= OnCompleteLoopOfRace;
 		RaceEvents.OnCompleteCheckpointEvent -= OnPassCheckpoint;
 		RaceEvents.OnCompleteRaceEvent -= OnCompleteRace;
+		RaceEvents.OnRestartRaceEvent -= RestartState;
 	}
 
 	private void Update()
@@ -64,5 +67,11 @@ public class RaceCompletionTimer : MonoBehaviour
 	private void OnCompleteRace()
 	{
 		isRaceCompleting = false;
+	}
+
+	private void RestartState()
+	{
+		isRaceCompleting = false;
+		RaceTimerUI.Instance.ShowTimeOfCompletingRace(0);
 	}
 }

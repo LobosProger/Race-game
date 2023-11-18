@@ -14,17 +14,24 @@ public class RecordPanelUI : MonoBehaviour
 	{
 		RaceEvents.OnCompleteRaceEvent += ShowLeaderboard;
 		RaceEvents.OnCompleteRaceByAnyNetworkPlayerEvent += UpdateLeaderboardWithRecords;
+		RaceEvents.OnRestartRaceEvent += HideLeaderboard;
 	}
 
 	private void OnDisable()
 	{
 		RaceEvents.OnCompleteRaceEvent -= ShowLeaderboard;
 		RaceEvents.OnCompleteRaceByAnyNetworkPlayerEvent -= UpdateLeaderboardWithRecords;
+		RaceEvents.OnRestartRaceEvent -= HideLeaderboard;
 	}
 
 	private void ShowLeaderboard()
 	{
 		leaderboardPanel.DOFade(1f, 0.5f);
+	}
+
+	private void HideLeaderboard()
+	{
+		leaderboardPanel.DOFade(0f, 0.5f);
 	}
 
 	private void UpdateLeaderboardWithRecords()
