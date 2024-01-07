@@ -25,6 +25,6 @@ After completing all loops, player can see his own record and records another pl
 
 ![Image Sequence_010_000022h05m](https://github.com/LobosProger/Race-game/assets/78168123/db336412-3eae-44ca-a0f2-2b6525b4b0c0)
 
-Added simple system of drive a car to gates by training and integrating neural network. I have used package ML Agents and reinforcement training for faster preparing neural network to drive a car by my experience. Still in development:
+Added simple system of drive a car to gates by training and integrating neural network. I have used package ML Agents, Pytorch library and reinforcement training for faster preparing neural network to drive a car by my experience. Still in development:
 
 https://github.com/LobosProger/Race-game/assets/78168123/1c5cbb12-7474-4cf4-be4c-13eebc2d1de2
